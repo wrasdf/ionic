@@ -36386,14 +36386,17 @@ function($rootScope, $document, $compile, $animate, $timeout, $ionicTemplateLoad
       $document[0].body.appendChild(element[0]);
       $document[0].body.classList.add('action-sheet-open');
 
-      $animate.addClass(element, 'active', function() {
-        if (scope.removed) return;
-        (done || angular.noop)();
+      $timeout(function() {
+        $animate.addClass(element, 'active', function() {
+          if (scope.removed) return;
+          (done || angular.noop)();
+        });
       });
+
       $timeout(function(){
         if (scope.removed) return;
         sheetEl.addClass('action-sheet-up');
-      }, 20, false);
+      }, 200, false);
     };
 
     // registerBackButtonAction returns a callback to deregister the action
